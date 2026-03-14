@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════════════ */
+:root {
+  --cream: #faf8f4;
+  --cream2: #f3efe7;
+  --cream3: #e9e3d9;
+  --forest: #1b3d2f;
+  --forest2: #254d3c;
+  --forest3: #346b52;
+  --gold: #c49a4a;
+  --gold2: #ddb96a;
+  --gold3: #f2d898;
+  --ink: #162119;
+  --ink2: #3d5c4a;
+  --ink3: #7a9e8a;
+  --white: #ffffff;
+  --red: #dc2626;
+  --greenok: #16a34a;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --sh:  0 4px 24px rgba(27,61,47,.10);
+  --shm: 0 12px 48px rgba(27,61,47,.14);
+  --shl: 0 28px 80px rgba(27,61,47,.18);
+
+  /* Responsive font scale */
+  --fs-hero:   clamp(2.2rem, 7vw, 5.2rem);
+  --fs-h2:     clamp(1.9rem, 4vw, 3.4rem);
+  --fs-h3:     clamp(1.4rem, 2.5vw, 2rem);
+  --fs-body:   clamp(0.88rem, 2vw, 0.97rem);
+  --fs-small:  clamp(0.75rem, 1.5vw, 0.84rem);
+
+  /* Responsive spacing */
+  --sec-pad: clamp(56px, 8vw, 96px) 5%;
+}
+
+/* ══════════════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a  { text-decoration: none; }
+img, video { max-width: 100%; height: auto; display: block; }
+button, a { -webkit-tap-highlight-color: transparent; }
+input, select, textarea, button { font-family: inherit; }
+
+/* ══════════════════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--cream2); }
+::-webkit-scrollbar-thumb { background: var(--forest); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* ══════════════════════════════════════════════════
+   CUSTOM CURSOR (desktop only)
+══════════════════════════════════════════════════ */
+@media (pointer: fine) {
+  body { cursor: none; }
+  #cdot, #cring {
+    position: fixed; border-radius: 50%; pointer-events: none;
+    z-index: 9999; top: 0; left: 0; will-change: transform;
+  }
+  #cdot {
+    width: 8px; height: 8px; background: var(--forest);
+    transform: translate(-50%, -50%);
+    transition: width .18s var(--ease), height .18s var(--ease), background .18s;
+  }
+  #cring {
+    width: 36px; height: 36px; border: 1.5px solid var(--forest); opacity: .4;
+    transform: translate(-50%, -50%);
+    transition: width .3s var(--ease), height .3s var(--ease), opacity .3s, border-color .3s;
+  }
+  body.ch #cdot { width: 14px; height: 14px; background: var(--gold); }
+  body.ch #cring { width: 50px; height: 50px; border-color: var(--gold); opacity: .6; }
+}
+
+/* ══════════════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════════════ */
+.rev { opacity: 0; transform: translateY(28px); transition: opacity .65s var(--ease), transform .65s var(--ease); }
+.rev.fl { transform: translateX(-28px); }
+.rev.fr { transform: translateX(28px); }
+.rev.on { opacity: 1; transform: translate(0); }
+
+/* ══════════════════════════════════════════════════
+   KEYFRAME ANIMATIONS
+══════════════════════════════════════════════════ */
+@keyframes sU      { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+@keyframes sR      { from{opacity:0;transform:translateX(28px)} to{opacity:1;transform:translateX(0)} }
+@keyframes pdotAnim{ 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.6)} }
+@keyframes fwaIn   { to{opacity:1} }
+@keyframes spin    { to{transform:rotate(360deg)} }
+@keyframes pulse   { 0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.5)} 50%{box-shadow:0 0 0 14px rgba(37,211,102,0)} }
+@keyframes bounceIn{ 0%{opacity:0;transform:scale(.5)} 60%{transform:scale(1.1)} 100%{opacity:1;transform:scale(1)} }
+@keyframes slideUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+@keyframes checkDraw{ to{stroke-dashoffset:0} }
+@keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+
+/* Hero entrance animations */
+.hanim-1 { opacity:0; animation:sU .7s var(--ease) .1s  forwards; }
+.hanim-2 { opacity:0; animation:sU .7s var(--ease) .2s  forwards; }
+.hanim-3 { opacity:0; animation:sU .7s var(--ease) .28s forwards; }
+.hanim-4 { opacity:0; animation:sU .7s var(--ease) .36s forwards; }
+.hanim-5 { opacity:0; animation:sU .7s var(--ease) .44s forwards; }
+.hanim-6 { opacity:0; animation:sU .7s var(--ease) .52s forwards; }
+.hanim-r { opacity:0; animation:sR .8s var(--ease) .3s  forwards; }
+
+/* ══════════════════════════════════════════════════
+   FORM SELECT ARROW
+══════════════════════════════════════════════════ */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a9e8a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* ══════════════════════════════════════════════════
+   LOADING SPINNER
+══════════════════════════════════════════════════ */
+.spinner {
+  display: inline-block;
+  width: 18px; height: 18px;
+  border: 2.5px solid rgba(255,255,255,.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════
+   SUCCESS CHECK ANIMATION
+══════════════════════════════════════════════════ */
+.success-check svg { animation: bounceIn .5s var(--ease) both; }
+.success-msg { animation: slideUp .4s var(--ease) .2s both; }
+
+/* ══════════════════════════════════════════════════
+   WHATSAPP PULSE BUTTON
+══════════════════════════════════════════════════ */
+.wa-fab {
+  position: fixed; bottom: 28px; right: 24px; z-index: 450;
+  width: 58px; height: 58px;
+  background: #25d366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 24px rgba(37,211,102,.45);
+  transition: transform .25s var(--ease), box-shadow .25s;
+  animation: fwaIn .5s var(--ease) 1.2s both;
+}
+.wa-fab::before {
+  content: '';
+  position: absolute; inset: -4px;
+  border-radius: 50%;
+  background: rgba(37,211,102,.3);
+  animation: pulse 2.4s ease infinite;
+}
+.wa-fab:hover { transform: scale(1.12); box-shadow: 0 10px 36px rgba(37,211,102,.6); }
+.wa-fab svg  { width: 30px; height: 30px; fill: white; position: relative; z-index: 1; }
+
+/* ══════════════════════════════════════════════════
+   FLOATING BOOK BUTTON
+══════════════════════════════════════════════════ */
+.float-book {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--forest); color: var(--cream);
+  padding: 13px 30px; border-radius: 50px;
+  font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: .88rem;
+  display: inline-flex; align-items: center; gap: 8px;
+  z-index: 400; white-space: nowrap; letter-spacing: .02em;
+  border: none; cursor: pointer;
+  box-shadow: 0 8px 36px rgba(27,61,47,.38);
+  transition: transform .4s var(--ease), box-shadow .3s, opacity .4s;
+  opacity: 0; pointer-events: none;
+}
+.float-book.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1; pointer-events: auto;
+}
+.float-book:hover { box-shadow: 0 14px 52px rgba(27,61,47,.52); }
+
+/* ══════════════════════════════════════════════════
+   STICKY MOBILE CALL BAR
+══════════════════════════════════════════════════ */
+.mobile-cta-bar {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--forest); color: var(--cream);
+  padding: 14px 20px;
+  align-items: center; justify-content: center; gap: 10px;
+  z-index: 390; font-weight: 700; font-size: .94rem;
+  box-shadow: 0 -4px 20px rgba(27,61,47,.2);
+  text-decoration: none;
+}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+══════════════════════════════════════════════════ */
+
+/* ── 1024px: Small laptop ───────────────────── */
+@media (max-width: 1100px) {
+  .hero-grid    { grid-template-columns: 1fr !important; }
+  .hl-diagonal  { display: none !important; }
+  .ab-grid      { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .appt-grid    { grid-template-columns: 1fr !important; }
+  .loc-grid     { grid-template-columns: 1fr !important; }
+  .foot-body    { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
+  .svc-grid     { grid-template-columns: 1fr 1fr !important; }
+  .rev-grid     { grid-template-columns: 1fr 1fr !important; }
+  .gallery-grid { grid-template-columns: 1fr 1fr !important; }
+  .faq-grid     { grid-template-columns: 1fr !important; gap: 40px !important; }
+}
+
+/* ── 768px: Tablet ──────────────────────────── */
+@media (max-width: 768px) {
+  :root { scroll-padding-top: 60px; }
+
+  .desktop-nav    { display: none !important; }
+  .mobile-menu-btn{ display: flex !important; }
+
+  .topbar         { display: none !important; }
+
+  .hero-left      { padding: clamp(48px, 8vw, 72px) 6% !important; }
+  .hero-right     { padding: 32px 6% !important; }
+  .hero-stats     { gap: 16px !important; margin-top: 40px !important; }
+  .hero-stat      { padding-right: 12px !important; margin-right: 12px !important; }
+
+  .svc-grid       { grid-template-columns: 1fr !important; }
+  .form-grid      { grid-template-columns: 1fr !important; }
+  .ffc            { grid-column: 1 !important; }
+  .rev-grid       { grid-template-columns: 1fr !important; }
+  .gallery-grid   { grid-template-columns: 1fr 1fr !important; }
+  .foot-body      { grid-template-columns: 1fr !important; gap: 28px !important; }
+
+  .trust-strip    { gap: 14px !important; padding: 16px 5% !important; }
+  .trust-left-grp { display: none !important; }
+
+  .mobile-cta-bar { display: flex !important; }
+
+  /* Bottom padding for mobile CTA bar */
+  body { padding-bottom: 56px; }
+
+  /* WhatsApp FAB adjusts above mobile CTA */
+  .wa-fab { bottom: 72px !important; right: 16px !important; width: 52px !important; height: 52px !important; }
+  .float-book { bottom: 72px !important; font-size: .8rem !important; padding: 11px 22px !important; }
+}
+
+/* ── 480px: Small phone ─────────────────────── */
+@media (max-width: 480px) {
+  .gallery-grid   { grid-template-columns: 1fr !important; }
+  .hero-btns      { flex-direction: column !important; }
+  .hero-btns a, .hero-btns button { width: 100% !important; justify-content: center !important; }
+  .ccontact       { flex-direction: column !important; align-items: flex-start !important; }
+  .cbtns          { flex-direction: column !important; width: 100% !important; }
+  .cbtns a        { justify-content: center !important; }
+}
+
+/* ── Min tap target for all interactive elements ── */
+@media (pointer: coarse) {
+  a, button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   CARD HOVER EFFECTS
+══════════════════════════════════════════════════ */
+.svcard-inner:hover { transform: translateY(-6px); box-shadow: var(--shl) !important; border-color: rgba(27,61,47,.15) !important; }
+.svcard-inner:hover .svcard-bar { transform: scaleX(1) !important; }
+.svcard-inner:hover .svcard-ico { background: rgba(27,61,47,.1) !important; border-color: rgba(27,61,47,.2) !important; }
+.rev-card:hover { transform: translateY(-4px); box-shadow: var(--shm) !important; }
+.icard-hover:hover { transform: translateY(-3px); box-shadow: var(--shm) !important; }
+
+/* ══════════════════════════════════════════════════
+   SKELETON LOADER
+══════════════════════════════════════════════════ */
+.skeleton {
+  background: linear-gradient(90deg, var(--cream2) 25%, var(--cream3) 50%, var(--cream2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 8px;
+}
+
+/* ══════════════════════════════════════════════════
+   FOCUS VISIBLE (accessibility)
+══════════════════════════════════════════════════ */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
