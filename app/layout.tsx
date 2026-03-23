@@ -103,13 +103,13 @@ const localBusinessSchema = {
     {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      opens: '09:30',
-      closes: '12:30',
+      opens: '10:00',
+      closes: '01:00',
     },
     {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      opens: '16:30',
+      opens: '16:00',
       closes: '20:00',
     },
   ],

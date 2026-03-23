@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import WhatsAppIcon from './WhatsAppIcon';
 
 const WA_URL = 'https://wa.me/917620750026';
 
@@ -43,9 +44,10 @@ export default function Footer() {
               <a
                 href="https://wa.me/917620750026?text=Hello%20Dr.%20Pravin,%20I'd%20like%20to%20book%20an%20appointment."
                 target="_blank"
-                rel="noopener noreferrer"
-              >
-                💬 WhatsApp Us
+                rel="noopener noreferrer">
+                  <WhatsAppIcon size={10} />
+                  
+                 <span >     WhatsApp Us</span>
               </a>
             </li>
           </ul>

@@ -1417,10 +1417,12 @@ a {
   font-size: 0.83rem;
   color: rgba(250, 248, 244, 0.5);
   transition: color 0.2s;
+  
 }
 
 .fcol ul a:hover {
   color: var(--gold2);
+   gap: 9px;
 }
 
 .fdiv {
@@ -1450,6 +1452,7 @@ a {
   width: 54px;
   height: 54px;
   background: #25d366;
+  color: #ffffff;
   border-radius: 50%;
   display: flex;
   align-items: center;

@@ -165,8 +165,8 @@ export default function Hero() {
           initial="hidden"
           animate="show"
         >
-          <StatItem target={10} label="Years Experience" started={countersStarted} />
-          <StatItem target={5000} label="Patients Treated" started={countersStarted} />
+          <StatItem target={30} label="Years Experience" started={countersStarted} />
+          <StatItem target={50} label="Patients Daily" started={countersStarted} />
           <StatItem target={6} label="Specialities" started={countersStarted} />
         </motion.div>
       </div>
@@ -190,11 +190,11 @@ export default function Hero() {
           <div className="slots">
             <div className="slot">
               <div className="slotl">☀️ Morning</div>
-              <div className="slott">9:30 – 12:30 PM</div>
+              <div className="slott">10:00 – 01:00 PM</div>
             </div>
             <div className="slot">
               <div className="slotl">🌆 Evening</div>
-              <div className="slott">4:30 – 8:00 PM</div>
+              <div className="slott">4:00 – 8:00 PM</div>
             </div>
           </div>
           <div className="cbadge">🚫 Sunday — Closed</div>
