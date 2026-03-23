@@ -194,7 +194,7 @@ export default function Hero() {
             </div>
             <div className="slot">
               <div className="slotl">🌆 Evening</div>
-              <div className="slott">4:00 – 8:00 PM</div>
+              <div className="slott">4:30 – 8:00 PM</div>
             </div>
           </div>
           <div className="cbadge">🚫 Sunday — Closed</div>
