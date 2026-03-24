@@ -53,7 +53,7 @@ export default function Location() {
               <p>
                 <strong>Monday – Saturday</strong>
                 <br />
-                Morning: 9:30 AM – 12:30 PM
+                Morning: 10:00 AM – 01:00 PM
                 <br />
                 Evening: 4:30 PM – 8:00 PM
                 <br />

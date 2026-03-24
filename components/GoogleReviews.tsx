@@ -116,7 +116,7 @@ export default function GoogleReviews() {
             </div>
             <div className="gr-divider" aria-hidden="true" />
             <a
-              href="https://www.google.com/maps/place/All+Care+Dental+Clinic"
+              href="https://g.page/r/Cd9R32kfHe_UEBM/review"
               target="_blank"
               rel="noopener noreferrer"
               className="gr-view-btn"
